@@ -1,0 +1,15 @@
+.bar-container {
+    width: 50%;
+    background-color: hsla(0, 0%, 88%, 0.842);
+    border-color: black;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 20%;
+    height: 20px;
+    background-color: hsl(200, 100%, 50%);
+    border-radius: 25px;
+    transition: width 0.5s ease-in-out;
+}
