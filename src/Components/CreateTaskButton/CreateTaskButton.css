@@ -1,0 +1,72 @@
+.new-task-button {
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #4a3f7f 0%, #5a2a6a 50%, #3a1f5a 100%);
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 6px 20px rgba(42, 19, 58, 0.5);
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    white-space: nowrap;
+    border: 1px solid rgba(107, 50, 107, 0.6);
+}
+
+.new-task-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: 0;
+}
+
+.new-task-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(42, 19, 58, 0.7);
+    background: linear-gradient(135deg, #5a2a6a 0%, #6a3a7a 50%, #4a2a6a 100%);
+}
+
+.new-task-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.new-task-button:active {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.new-task-icon {
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.button-text {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    position: relative;
+    z-index: 1;
+}
+
+.new-task-button:hover .new-task-icon {
+    transform: rotate(90deg) scale(1.1);
+}

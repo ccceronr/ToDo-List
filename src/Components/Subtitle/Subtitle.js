@@ -1,4 +1,5 @@
 import React from 'react';
+import './Subtitle.css';
 
 const Subtitle = (props) => {
     if (props.inicio === 1) {

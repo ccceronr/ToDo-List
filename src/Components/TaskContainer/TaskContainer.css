@@ -1,0 +1,40 @@
+.task-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px 0;
+    max-height: 750px;
+    overflow-y: auto;
+    padding-right: 8px;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+    flex-grow: 1;
+}
+
+/* Scroll personalizado */
+.task-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.task-container::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, rgba(51, 51, 102, 0.15) 0%, rgba(51, 51, 102, 0.1) 100%);
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.task-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5a3a9a 0%, #7a5aba 50%, #5a3a9a 100%);
+    border-radius: 10px;
+    border: 2px solid rgba(51, 51, 102, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.task-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #6a4aaa 0%, #8a6aca 50%, #6a4aaa 100%);
+    box-shadow: 0 0 10px rgba(122, 90, 170, 0.5);
+}
+
+/* Firefox */
+.task-container {
+    scrollbar-width: thin;
+    scrollbar-color: #5a3a9a rgba(51, 51, 102, 0.15);
+}

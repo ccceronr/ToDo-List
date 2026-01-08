@@ -1,3 +1,5 @@
+import './TaskFinder.css';
+
 const TaskFinder = () => {
     return(
         <div className ="task-finder-container">

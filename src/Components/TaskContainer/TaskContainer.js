@@ -1,3 +1,5 @@
+import './TaskContainer.css';
+
 const TaskContainer = (props) => {
   return <div className="task-container">{props.children}</div>;
 };

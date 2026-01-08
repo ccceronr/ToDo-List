@@ -15,6 +15,10 @@ function App() {
       <TaskFinder />
       <TaskContainer>
         <TaskCreated />
+        <TaskCreated />
+        <TaskCreated />
+        <TaskCreated />
+        <TaskCreated />
       </TaskContainer>
       <CreateTaskButton/>
     </div>

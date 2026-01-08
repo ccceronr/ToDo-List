@@ -1,38 +1,138 @@
-.App {
+.ToDoContainer {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  max-width: 700px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 20px 25px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  animation: slideInDown 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   display: flex;
   flex-direction: column;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.ToDoContainer h1 {
+  font-size: 2.5rem;
+  margin: 0 0 5px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 0 30px rgba(102, 126, 234, 0.4);
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.subtitle-button-wrapper {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 5px;
+  margin-bottom: 15px;
+  flex-wrap: nowrap;
+  padding: 10px 15px;
+  background: linear-gradient(135deg, rgba(51, 51, 102, 0.3) 0%, rgba(102, 51, 102, 0.25) 100%);
+  border-radius: 16px;
+  border: 1.5px solid rgba(102, 126, 234, 0.35);
+  box-shadow: 0 8px 30px rgba(51, 51, 102, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.ToDoContainer > h2 {
+  margin: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  flex: 0 1 auto;
 }
 
-@keyframes App-logo-spin {
+.ToDoContainer > button {
+  margin: 0;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+  flex: 0 0 auto;
+}
+
+@keyframes slideInDown {
   from {
-    transform: rotate(0deg);
+    transform: translateY(-50px);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(0);
+    opacity: 1;
   }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Scroll personalizado para ToDoContainer */
+.ToDoContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ToDoContainer::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, rgba(51, 51, 102, 0.15) 0%, rgba(51, 51, 102, 0.1) 100%);
+    border-radius: 10px;
+}
+
+.ToDoContainer::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5a3a9a 0%, #7a5aba 50%, #5a3a9a 100%);
+    border-radius: 10px;
+    border: 2px solid rgba(51, 51, 102, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ToDoContainer::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #6a4aaa 0%, #8a6aca 50%, #6a4aaa 100%);
+    box-shadow: 0 0 10px rgba(122, 90, 170, 0.5);
+}
+
+/* Firefox */
+.ToDoContainer {
+    scrollbar-width: thin;
+    scrollbar-color: #5a3a9a rgba(51, 51, 102, 0.15);
 }
