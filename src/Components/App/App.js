@@ -2,6 +2,9 @@ import Subtitle from '../Subtitle/Subtitle';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import './App.css';
 import TaskFinder from '../TaskFinder/TaskFinder';
+import TaskContainer from '../TaskContainer/TaskContainer';
+import TaskCreated from '../TaskCreated/TaskCreated';
+import CreateTaskButton from '../CreateTaskButton/CreateTaskButton';
 
 function App() {
   return (
@@ -10,6 +13,10 @@ function App() {
       <Subtitle inicio={1}/>
       <ProgressBar />
       <TaskFinder />
+      <TaskContainer>
+        <TaskCreated />
+      </TaskContainer>
+      <CreateTaskButton/>
     </div>
   )
 }
