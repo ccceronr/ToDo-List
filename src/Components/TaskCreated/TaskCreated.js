@@ -2,12 +2,12 @@ import { CiCircleCheck } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import './TaskCreated.css';
 
-const TaskCreated = () => {
+const TaskCreated = ({text,status, ontoogle, deleteTask}) => {
     return (
-    <div className="task-created">
-        <CiCircleCheck className="check-icon"/>
-        <p className="task-name">Tarea 1</p>
-        <RiDeleteBin6Line className="delete-icon"/>
+    <div className={`task-created ${status ? "realized" : ""}`}>
+        <CiCircleCheck className="check-icon" onClick={ontoogle} />
+        <p className="task-name">{text}</p>
+        <RiDeleteBin6Line className="delete-icon" onClick={deleteTask}/>
     </div>
     )
 }
