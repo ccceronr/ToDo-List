@@ -17,8 +17,9 @@ const tasks = [
 
 function App() {
   const [state, setState] = React.useState(tasks);
+  const [inputValue, setInputValue] = React.useState("")
 
-  const tooglecheck = (id) => {
+  const togglecheck = (id) => {
     const newtask = state.map((task) => {
       if (task.id === id) {
         return { ...task, status: !task.status };
@@ -32,22 +33,26 @@ function App() {
     const newTasks = state.filter(task => task.id!== id)
     setState(newTasks)
   }
+
+  const filteredTasks = state.filter( task => task.taskName.toLowerCase().includes(inputValue.toLowerCase()))
+
   return (
     <div className="ToDoContainer">
       <h1>ToDo List ccceron</h1>
       <Subtitle inicio={1} />
       <ProgressBar />
-      <TaskFinder />
-      <TaskContainer>
-        {state.map((task) => (
+      <TaskFinder inputValue={inputValue} setInputValue={setInputValue}/>
+      <TaskContainer filteredTasks={filteredTasks}>
+        {filteredTasks.map((task) => (
           <TaskCreated
             key={task.id}
             text={task.taskName}
             status={task.status}
-            ontoogle={() => tooglecheck(task.id)}
+            ontoggle={() => togglecheck(task.id)}
             deleteTask={() => deleteTask(task.id)}
           />
-        ))}
+        )) 
+        }
       </TaskContainer>
       <CreateTaskButton />
     </div>
