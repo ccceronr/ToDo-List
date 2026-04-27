@@ -7,7 +7,7 @@ import TaskCreated from "../TaskCreated/TaskCreated";
 import CreateTaskButton from "../CreateTaskButton/CreateTaskButton";
 import React from "react";
 
-const tasks = [
+const INITIAL_TASKS = [
   { id: 1, taskName: "tender la cama", status: true },
   { id: 2, taskName: "lavar ropa", status: false },
   { id: 3, taskName: "bañarse", status: true },
@@ -15,9 +15,24 @@ const tasks = [
   { id: 5, taskName: "ir al gym", status: true },
 ];
 
+function getInitialTasks() {
+  try {
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : INITIAL_TASKS;
+  } catch {
+    return INITIAL_TASKS;
+  }
+}
+
 function App() {
-  const [state, setState] = React.useState(tasks);
-  const [inputValue, setInputValue] = React.useState("")
+  const [state, setState] = React.useState(getInitialTasks);
+  const [inputValue, setInputValue] = React.useState("");
+  const [showModal, setShowModal] = React.useState(false);
+  const [newTaskName, setNewTaskName] = React.useState("");
+
+  React.useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(state));
+  }, [state]);
 
   const togglecheck = (id) => {
     const newtask = state.map((task) => {
@@ -29,19 +44,38 @@ function App() {
     setState(newtask);
   };
 
-  const deleteTask = (id) =>{
-    const newTasks = state.filter(task => task.id!== id)
-    setState(newTasks)
-  }
+  const deleteTask = (id) => {
+    const newTasks = state.filter(task => task.id !== id);
+    setState(newTasks);
+  };
 
-  const filteredTasks = state.filter( task => task.taskName.toLowerCase().includes(inputValue.toLowerCase()))
+  const createTask = () => {
+    const trimmed = newTaskName.trim();
+    if (!trimmed) return;
+    const newId = state.length > 0 ? Math.max(...state.map(t => t.id)) + 1 : 1;
+    setState([...state, { id: newId, taskName: trimmed, status: false }]);
+    setNewTaskName("");
+    setShowModal(false);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setNewTaskName("");
+  };
+
+  const completedCount = state.filter(t => t.status).length;
+  const progressPercent = state.length > 0 ? Math.round((completedCount / state.length) * 100) : 0;
+
+  const filteredTasks = state.filter(task =>
+    task.taskName.toLowerCase().includes(inputValue.toLowerCase())
+  );
 
   return (
     <div className="ToDoContainer">
       <h1>ToDo List ccceron</h1>
       <Subtitle inicio={1} />
-      <ProgressBar />
-      <TaskFinder inputValue={inputValue} setInputValue={setInputValue}/>
+      <ProgressBar percent={progressPercent} />
+      <TaskFinder inputValue={inputValue} setInputValue={setInputValue} />
       <TaskContainer filteredTasks={filteredTasks}>
         {filteredTasks.map((task) => (
           <TaskCreated
@@ -51,10 +85,34 @@ function App() {
             ontoggle={() => togglecheck(task.id)}
             deleteTask={() => deleteTask(task.id)}
           />
-        )) 
-        }
+        ))}
       </TaskContainer>
-      <CreateTaskButton />
+      <CreateTaskButton onClick={() => setShowModal(true)} />
+
+      {showModal && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-card" onClick={e => e.stopPropagation()}>
+            <h3 className="modal-title">Nueva Tarea</h3>
+            <input
+              className="modal-input"
+              type="text"
+              placeholder="Nombre de la tarea..."
+              value={newTaskName}
+              onChange={e => setNewTaskName(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && createTask()}
+              autoFocus
+            />
+            <div className="modal-actions">
+              <button className="modal-btn modal-btn-cancel" onClick={closeModal}>
+                Cancelar
+              </button>
+              <button className="modal-btn modal-btn-confirm" onClick={createTask}>
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
